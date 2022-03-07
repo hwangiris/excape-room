@@ -70,13 +70,10 @@
           // 用餐人數
           let amount = $('#amount').val() || '未填寫';
           // 需求
-          let values = new Array();
-          function demand() {
-            $.each($("input[name='demand']:checked"), function() {
-              values.push($(this).val());
-            });
-          };
-          demand();
+          let chair = $('#child-chair').val() ? '是' : '';
+          let vegetarian = $('#vegetarian').val() ? '是' : '';
+          let smoking = $('#smoking').val() ? '是' : '';
+
           // post
           let data = {
             'entry.1928934661': name,                         // 姓名
@@ -85,14 +82,13 @@
             'entry.2074575752_month': date.split('-')[1],     // 日期_月
             'entry.2074575752_day': date.split('-')[2],       // 日期_日
             'entry.319099272': amount,                        // 用餐人數
-            'entry.1882337838_sentinel': values.toString(),   // 需求
           };
 
           console.log(data);
 
           $.ajax({
             type: 'POST',
-            url: 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSdDtT13lIgiFOqVTGg_Nn5qHZMkPLvZKwch4NBXifRqAMY7jw/formResponse',
+            url: 'https://docs.google.com/forms/u/0/d/e/1FAIpQLScfMJ16TFwjjEDV4j6dEal4s8smT4sDID5dlvhx9yRtQtjPuQ/formResponse',
             data: data,
             contentType: 'application/json',
             dataType: 'jsonp',
