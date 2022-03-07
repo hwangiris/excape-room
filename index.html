@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>六角西餐廳</title>
+    <link rel="stylesheet" href="assets/css/main.min.css">
+  </head>
+  <body>
+    <div class="container py-3">
+      <h1 class="text-center mb-5">六角西餐廳</h1>
+      <form class="row g-3">
+        <div class="col-md-6 mb-1">
+          <label for="name" class="form-label">姓名</label>
+          <input type="text" class="form-control" id="name" placeholder="請輸入姓名" name="name">
+        </div>
+        <div class="col-md-6 mb-1">
+          <label for="tel" class="form-label">電話</label>
+          <input type="tel" class="form-control" id="tel" placeholder="請輸入電話" name="tel">
+        </div>
+        <div class="col-12 mb-1">
+          <label for="date" class="form-label">日期</label>
+          <input type="date" class="form-control" id="date" placeholder="請選擇日期" name="date">
+        </div>
+        <div class="col-12 mb-1">
+          <label for="amount" class="form-label">用餐人數</label>
+          <select id="amount" class="form-select" name="amount">
+            <option selected>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+          </select>
+        </div>
+        <div class="col-12 mb-1">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="demand" value="需要兒童座椅" id="child-chair">
+            <label class="form-check-label" for="child-chair">
+              需要兒童座椅
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="demand" value="素食餐點" id="vegetarian">
+            <label class="form-check-label" for="vegetarian">
+              素食餐點
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="demand" value="吸煙區" id="smoking">
+            <label class="form-check-label" for="smoking">
+              吸煙區
+            </label>
+          </div>
+        </div>
+        <button type="button" id="submit" class="btn btn-dark">送出</button>
+      </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+      $(function() {
+        $('#submit').on('click', function() {
+          // 姓名
+          let name = $('#name').val() || '未填寫';
+          // 電話
+          let tel = $('#tel').val() || '未填寫';
+          // 日期
+          let date = $('#date').val() || '未填寫';
+          // 用餐人數
+          let amount = $('#amount').val() || '未填寫';
+          // 需求
+          let values = new Array();
+          function demand() {
+            $.each($("input[name='demand']:checked"), function() {
+              values.push($(this).val());
+            });
+          };
+          demand();
+          // post
+          let data = {
+            'entry.1928934661': name,                         // 姓名
+            'entry.452370582': tel,                           // 電話
+            'entry.2074575752_year': date.split('-')[0],      // 日期_年
+            'entry.2074575752_month': date.split('-')[1],     // 日期_月
+            'entry.2074575752_day': date.split('-')[2],       // 日期_日
+            'entry.319099272': amount,                        // 用餐人數
+            'entry.1882337838_sentinel': values.toString(),   // 需求
+          };
+
+          console.log(data);
+
+          $.ajax({
+            type: 'POST',
+            url: 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSdDtT13lIgiFOqVTGg_Nn5qHZMkPLvZKwch4NBXifRqAMY7jw/formResponse',
+            data: data,
+            contentType: 'application/json',
+            dataType: 'jsonp',
+            complete: function() {
+              alert('資料已送出！');
+            }
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
