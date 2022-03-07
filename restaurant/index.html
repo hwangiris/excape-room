@@ -10,7 +10,7 @@
   <body>
     <div class="container py-3">
       <h1 class="text-center mb-5">六角西餐廳</h1>
-      <form class="row g-3">
+      <form class="row g-3" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLScfMJ16TFwjjEDV4j6dEal4s8smT4sDID5dlvhx9yRtQtjPuQ/formResponse" method="POST">
         <div class="col-md-6 mb-1">
           <label for="name" class="form-label">姓名</label>
           <input type="text" class="form-control" id="name" placeholder="請輸入姓名" name="name">
@@ -54,49 +54,49 @@
             </label>
           </div>
         </div>
-        <button type="button" id="submit" class="btn btn-dark">送出</button>
+        <input type="hidden" name="entry.1928934661" value="">
+        <input type="hidden" name="entry.452370582" value="">
+        <input type="hidden" name="entry.2074575752_year" value="">
+        <input type="hidden" name="entry.2074575752_month" value="">
+        <input type="hidden" name="entry.2074575752_day" value="">
+        <input type="hidden" name="entry.319099272" value="">
+        <input type="hidden" name="entry.132999929" value="">
+        <input type="hidden" name="entry.132999929" value="">
+        <input type="hidden" name="entry.132999929" value="">
+        <button type="submit" class="btn btn-dark">送出</button>
       </form>
     </div>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script>
-      $(function() {
-        $('#submit').on('click', function() {
-          // 姓名
-          let name = $('#name').val() || '未填寫';
-          // 電話
-          let tel = $('#tel').val() || '未填寫';
-          // 日期
-          let date = $('#date').val() || '未填寫';
-          // 用餐人數
-          let amount = $('#amount').val() || '未填寫';
-          // 需求
-          let chair = $('#child-chair').val() ? '是' : '';
-          let vegetarian = $('#vegetarian').val() ? '是' : '';
-          let smoking = $('#smoking').val() ? '是' : '';
+      const form_name = document.getElementById('name');
+      const form_tel = document.getElementById('tel');
+      const form_date = document.getElementById('date');
+      const form_amount = document.getElementById('amount');
+      const demand_chair = document.getElementById('child-chair');
+      const demand_vegetarian = document.getElementById('vegetarian');
+      const demand_smoking = document.getElementById('smoking');
 
-          // post
-          let data = {
-            'entry.1928934661': name,                         // 姓名
-            'entry.452370582': tel,                           // 電話
-            'entry.2074575752_year': date.split('-')[0],      // 日期_年
-            'entry.2074575752_month': date.split('-')[1],     // 日期_月
-            'entry.2074575752_day': date.split('-')[2],       // 日期_日
-            'entry.319099272': amount,                        // 用餐人數
-          };
-
-          console.log(data);
-
-          $.ajax({
-            type: 'POST',
-            url: 'https://docs.google.com/forms/u/0/d/e/1FAIpQLScfMJ16TFwjjEDV4j6dEal4s8smT4sDID5dlvhx9yRtQtjPuQ/formResponse',
-            data: data,
-            contentType: 'application/json',
-            dataType: 'jsonp',
-            complete: function() {
-              alert('資料已送出！');
-            }
-          });
-        });
+      form_name.addEventListener('keyup', () => {
+        document.getElementsByName("entry.1928934661")[0].value = form_name.value;
+      });
+      form_tel.addEventListener('keyup', () => {
+        document.getElementsByName("entry.452370582")[0].value = form_tel.value;
+      });
+      form_date.addEventListener('change', (evt) => {
+        document.getElementsByName("entry.2074575752_year")[0].value = evt.target.value.split('-')[0];
+        document.getElementsByName("entry.2074575752_month")[0].value = evt.target.value.split('-')[1];
+        document.getElementsByName("entry.2074575752_day")[0].value = evt.target.value.split('-')[2];
+      });
+      form_amount.addEventListener('change', (evt) => {
+        document.getElementsByName("entry.319099272")[0].value = evt.target.value;
+      });
+      demand_chair.addEventListener('change', (evt) => {
+        document.getElementsByName("entry.132999929")[0].value = evt.target.value;
+      });
+      demand_vegetarian.addEventListener('change', (evt) => {
+        document.getElementsByName("entry.132999929")[1].value = evt.target.value;
+      });
+      demand_smoking.addEventListener('change', (evt) => {
+        document.getElementsByName("entry.132999929")[2].value = evt.target.value;
       });
     </script>
   </body>
