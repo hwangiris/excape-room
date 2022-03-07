@@ -18,26 +18,27 @@
             action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSew-bSa3hhI8WV8rwdZ6_p7CHx3iyM7vhSVV00oIrLg8WhaMw/formResponse"
           >
             <div class="col-md-6 mb-1">
-              <label for="name" class="form-label">姓名</label>
+              <label for="name" class="form-label">姓名<span class="text-danger">*</span></label>
               <input type="text" class="form-control" id="name" placeholder="請輸入姓名" name="entry.1928934661" required>
             </div>
             <div class="col-md-6 mb-1">
-              <label for="tel" class="form-label">電話</label>
+              <label for="tel" class="form-label">電話<span class="text-danger">*</span></label>
               <input type="tel" class="form-control" id="tel" placeholder="請輸入電話" name="entry.452370582" required>
             </div>
             <div class="col-12 mb-1">
-              <label for="date" class="form-label">日期</label>
+              <label for="date" class="form-label">日期<span class="text-danger">*</span></label>
               <input type="date" class="form-control" id="date" placeholder="請選擇日期" required>
             </div>
             <div class="col-12 mb-1">
-              <label for="amount" class="form-label">用餐人數</label>
+              <label for="amount" class="form-label">用餐人數<span class="text-danger">*</span></label>
               <select id="amount" class="form-select" name="entry.319099272" required>
-                <option selected>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-                <option>6</option>
+                <option selected disabled>請選擇用餐人數</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
               </select>
             </div>
             <div class="col-12 mb-1">
@@ -63,18 +64,24 @@
             <input type="hidden" name="entry.2074575752_year" value="">
             <input type="hidden" name="entry.2074575752_month" value="">
             <input type="hidden" name="entry.2074575752_day" value="">
-            <button type="submit" class="btn btn-dark">送出</button>
+            <button type="submit" class="btn btn-dark" disabled="disabled">送出</button>
           </form>
         </div>
       </div>
     </div>
     <script>
       const form_date = document.getElementById('date');
+      const form_amount = document.getElementById('amount');
       form_date.addEventListener('change', (evt) => {
         document.getElementsByName("entry.2074575752_year")[0].value = evt.target.value.split('-')[0];
         document.getElementsByName("entry.2074575752_month")[0].value = evt.target.value.split('-')[1];
         document.getElementsByName("entry.2074575752_day")[0].value = evt.target.value.split('-')[2];
       });
+      form_amount.addEventListener('change', (evt) => {
+        if ( !isNaN(Number(evt.target.value)) ) {
+          document.querySelector('button').removeAttribute('disabled');
+        }
+      })
     </script>
   </body>
 </html>
