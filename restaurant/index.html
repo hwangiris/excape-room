@@ -10,97 +10,70 @@
   <body>
     <div class="container py-3">
       <h1 class="text-center mb-5">六角西餐廳</h1>
-      <form
-        class="row g-3"
-        action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSew-bSa3hhI8WV8rwdZ6_p7CHx3iyM7vhSVV00oIrLg8WhaMw/formResponse"
-        method="POST"
-      >
-        <div class="col-md-6 mb-1">
-          <label for="name" class="form-label">姓名</label>
-          <input type="text" class="form-control" id="name" placeholder="請輸入姓名" name="name">
+      <div class="row">
+        <div class="col-md-8 offset-md-2">
+          <form
+            class="row g-3"
+            method="post"
+            action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSew-bSa3hhI8WV8rwdZ6_p7CHx3iyM7vhSVV00oIrLg8WhaMw/formResponse"
+          >
+            <div class="col-md-6 mb-1">
+              <label for="name" class="form-label">姓名</label>
+              <input type="text" class="form-control" id="name" placeholder="請輸入姓名" name="entry.1928934661" required>
+            </div>
+            <div class="col-md-6 mb-1">
+              <label for="tel" class="form-label">電話</label>
+              <input type="tel" class="form-control" id="tel" placeholder="請輸入電話" name="entry.452370582" required>
+            </div>
+            <div class="col-12 mb-1">
+              <label for="date" class="form-label">日期</label>
+              <input type="date" class="form-control" id="date" placeholder="請選擇日期" required>
+            </div>
+            <div class="col-12 mb-1">
+              <label for="amount" class="form-label">用餐人數</label>
+              <select id="amount" class="form-select" name="entry.319099272" required>
+                <option selected>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+              </select>
+            </div>
+            <div class="col-12 mb-1">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="entry.132999929" value="需要兒童座椅" id="child-chair">
+                <label class="form-check-label" for="child-chair">
+                  需要兒童座椅
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="entry.132999929" value="素食餐點" id="vegetarian">
+                <label class="form-check-label" for="vegetarian">
+                  素食餐點
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="entry.132999929" value="吸煙區" id="smoking">
+                <label class="form-check-label" for="smoking">
+                  吸煙區
+                </label>
+              </div>
+            </div>
+            <input type="hidden" name="entry.2074575752_year" value="">
+            <input type="hidden" name="entry.2074575752_month" value="">
+            <input type="hidden" name="entry.2074575752_day" value="">
+            <button type="submit" class="btn btn-dark">送出</button>
+          </form>
         </div>
-        <div class="col-md-6 mb-1">
-          <label for="tel" class="form-label">電話</label>
-          <input type="tel" class="form-control" id="tel" placeholder="請輸入電話" name="tel">
-        </div>
-        <div class="col-12 mb-1">
-          <label for="date" class="form-label">日期</label>
-          <input type="date" class="form-control" id="date" placeholder="請選擇日期" name="date">
-        </div>
-        <div class="col-12 mb-1">
-          <label for="amount" class="form-label">用餐人數</label>
-          <select id="amount" class="form-select" name="amount">
-            <option selected>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-            <option>6</option>
-          </select>
-        </div>
-        <div class="col-12 mb-1">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" name="demand" value="需要兒童座椅" id="child-chair">
-            <label class="form-check-label" for="child-chair">
-              需要兒童座椅
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" name="demand" value="素食餐點" id="vegetarian">
-            <label class="form-check-label" for="vegetarian">
-              素食餐點
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" name="demand" value="吸煙區" id="smoking">
-            <label class="form-check-label" for="smoking">
-              吸煙區
-            </label>
-          </div>
-        </div>
-        <input type="hidden" name="entry.1928934661" value="">
-        <input type="hidden" name="entry.452370582" value="">
-        <input type="hidden" name="entry.2074575752_year" value="">
-        <input type="hidden" name="entry.2074575752_month" value="">
-        <input type="hidden" name="entry.2074575752_day" value="">
-        <input type="hidden" name="entry.319099272" value="">
-        <input type="hidden" name="entry.132999929" value="">
-        <input type="hidden" name="entry.132999929" value="">
-        <input type="hidden" name="entry.132999929" value="">
-        <button type="submit" class="btn btn-dark">送出</button>
-      </form>
+      </div>
     </div>
     <script>
-      const form_name = document.getElementById('name');
-      const form_tel = document.getElementById('tel');
       const form_date = document.getElementById('date');
-      const form_amount = document.getElementById('amount');
-      const demand_chair = document.getElementById('child-chair');
-      const demand_vegetarian = document.getElementById('vegetarian');
-      const demand_smoking = document.getElementById('smoking');
-
-      form_name.addEventListener('keyup', () => {
-        document.getElementsByName("entry.1928934661")[0].value = form_name.value;
-      });
-      form_tel.addEventListener('keyup', () => {
-        document.getElementsByName("entry.452370582")[0].value = form_tel.value;
-      });
       form_date.addEventListener('change', (evt) => {
         document.getElementsByName("entry.2074575752_year")[0].value = evt.target.value.split('-')[0];
         document.getElementsByName("entry.2074575752_month")[0].value = evt.target.value.split('-')[1];
         document.getElementsByName("entry.2074575752_day")[0].value = evt.target.value.split('-')[2];
-      });
-      form_amount.addEventListener('change', (evt) => {
-        document.getElementsByName("entry.319099272")[0].value = evt.target.value;
-      });
-      demand_chair.addEventListener('change', (evt) => {
-        document.getElementsByName("entry.132999929")[0].value = evt.target.value;
-      });
-      demand_vegetarian.addEventListener('change', (evt) => {
-        document.getElementsByName("entry.132999929")[1].value = evt.target.value;
-      });
-      demand_smoking.addEventListener('change', (evt) => {
-        document.getElementsByName("entry.132999929")[2].value = evt.target.value;
       });
     </script>
   </body>
