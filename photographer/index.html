@@ -55,11 +55,12 @@
           percentPosition: true
         });
         $('.spinner-border').hide();
-        $('.grid-item').removeClass('opacity-0').addClass('animate__bounceIn');
         const items = document.querySelectorAll('.grid-item');
-        console.log(items);
         items.forEach((item, index) => {
-          item.style.animationDelay = `${index * 0.1}s`;
+          setTimeout(function(){
+            item.classList.remove('opacity-0');
+            item.classList.add('animate__bounceIn');
+          }, index * 0.1)
         });
       });
     </script>
