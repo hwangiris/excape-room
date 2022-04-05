@@ -56,6 +56,11 @@
         });
         $('.spinner-border').hide();
         $('.grid-item').removeClass('opacity-0').addClass('animate__bounceIn');
+        const items = document.querySelectorAll('.grid-item');
+        console.log(items);
+        items.forEach((item, index) => {
+          item.style.animationDelay = `${index * 0.1}s`;
+        });
       });
     </script>
   </body>
