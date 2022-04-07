@@ -1,26 +1,13 @@
-(function () {
-    var cors_api_host = 'iris-cors-anywhere.herokuapp.com';
-    var cors_api_url = 'https://' + cors_api_host + '/';
-    var slice = [].slice;
-    var origin = window.location.protocol + '//' + window.location.host;
-    var open = XMLHttpRequest.prototype.open;
-    XMLHttpRequest.prototype.open = function () {
-        var args = slice.call(arguments);
-        var targetOrigin = /^https?:\/\/([^\/]+)/i.exec(args[1]);
-        if (targetOrigin && targetOrigin[0].toLowerCase() !== origin &&
-            targetOrigin[1] !== cors_api_host) {
-            args[1] = cors_api_url + args[1];
-        }
-        return open.apply(this, args);
-    };
-})();
-
+const corsApi = 'https://iris-cors-anywhere.herokuapp.com/';
 const newsListApi = 'https://hex-escape-room.herokuapp.com/api/cors/news';
 
-axios.get(newsListApi)
+axios.get(corsApi+newsListApi)
     .then((response) => {
         const newsList = response.data.data;
         renderNewsList(newsList);
+    })
+    .catch((error) => {
+        console.log(error);
     })
 
 function renderNewsList(data) {
@@ -49,7 +36,7 @@ function renderNewsList(data) {
 function renderNewsItem(id) {
     let item = '';
     console.log(id);
-    axios.get(`${newsListApi}/${id}`)
+    axios.get(`${corsApi}${newsListApi}/${id}`)
         .then((response) => {
             news = response.data.data;
             document.querySelector('.newsItem').classList.remove('visually-hidden');
@@ -60,6 +47,9 @@ function renderNewsItem(id) {
             <p>${news.description}</p>
             <a href="${news.url}" target="blank">看更多</a>`;
             document.querySelector('.newsItem .item').innerHTML = item;
+        })
+        .catch((error) => {
+            console.log(error);
         })
 }
 
